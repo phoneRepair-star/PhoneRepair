@@ -1,134 +1,852 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PhonePro | Réparation Smartphone</title>
+<meta name="description" content="Réparation iPhone, Samsung. Écran, batterie, diagnostic gratuit. Garantie 3 mois.">
+<meta name="theme-color" content="#0a0a12">
+<meta property="og:title" content="PhonePro | Réparation Smartphone">
+<meta property="og:description" content="Réparation express iPhone & Samsung. Diagnostic gratuit. 6000+ réparations. Garantie 3 mois.">
+<meta property="og:type" content="website">
 
-<title>PhonePro | Réparation Smartphone Paris</title>
-<meta name="description" content="Réparation iPhone, Samsung à Paris. Écran, batterie, diagnostic gratuit. Intervention rapide.">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-body{font-family:Inter,sans-serif;margin:0;background:#fff;color:#111}
-nav{position:fixed;top:0;width:100%;background:#fff;padding:15px 20px;display:flex;justify-content:space-between;border-bottom:1px solid #eee;z-index:10}
-.hero{padding:120px 20px;text-align:center}
-.hero h1{font-size:42px}
-.btn{background:#0071e3;color:#fff;padding:12px 22px;border-radius:30px;text-decoration:none;margin:5px;display:inline-block}
-section{padding:70px 20px;text-align:center}
-.grid{display:flex;flex-wrap:wrap;justify-content:center}
-.card{background:#f5f5f7;padding:20px;border-radius:12px;margin:10px;max-width:260px}
-input,textarea{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #ddd}
-button{background:#0071e3;color:#fff;border:none;padding:14px;border-radius:30px;width:100%;cursor:pointer}
-#msg{margin-top:10px;font-size:14px}
-.success{color:#34d26f}
-.error{color:#ff3b30}
-footer{background:#111;color:#aaa;padding:20px}
+/* ─── VARIABLES ─── */
+:root {
+  --bg:#0a0a12;--bg2:#12121e;--bg3:#1a1a2e;--card:#16162a;
+  --border:rgba(255,255,255,0.08);--text:#f0f0f8;--muted:#8888aa;
+  --accent:#4f8dff;--accent2:#00d4ff;--glow:rgba(79,141,255,0.25);
+  --green:#34d26f;--red:#ff4555;--yellow:#f5a623;
+  --radius:16px;--nav-h:64px;--shadow:0 8px 40px rgba(0,0,0,0.4);
+}
+[data-theme="light"]{
+  --bg:#f5f5fa;--bg2:#eeeef8;--bg3:#e8e8f5;--card:#ffffff;
+  --border:rgba(0,0,0,0.08);--text:#0a0a18;--muted:#5a5a7a;
+  --glow:rgba(79,141,255,0.12);--shadow:0 8px 40px rgba(0,0,0,0.1);
+}
+
+/* ─── BASE ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;transition:background .4s,color .4s}
+a{color:inherit;text-decoration:none}
+
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4}
+
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:rgba(10,10,18,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:1000;transition:background .4s}
+[data-theme="light"] nav{background:rgba(245,245,250,.9)}
+
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.5px;display:flex;align-items:center;gap:8px}
+.nav-logo-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px}
+
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{padding:7px 13px;border-radius:30px;font-size:14px;font-weight:500;color:var(--muted);transition:color .2s,background .2s}
+.nav-links a:hover{color:var(--text);background:var(--border)}
+
+.nav-right{display:flex;align-items:center;gap:8px}
+.theme-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--card);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:transform .3s}
+.theme-btn:hover{transform:scale(1.1) rotate(15deg)}
+
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;border-radius:8px;border:1px solid var(--border);background:var(--card)}
+.hamburger span{width:20px;height:2px;background:var(--text);border-radius:2px;transition:transform .3s,opacity .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+.mobile-menu{position:fixed;top:var(--nav-h);left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--border);padding:16px;display:flex;flex-direction:column;gap:4px;transform:translateY(-110%);transition:transform .35s cubic-bezier(.4,0,.2,1);z-index:999}
+.mobile-menu.open{transform:translateY(0)}
+.mobile-menu a{padding:12px 16px;border-radius:12px;font-size:16px;font-weight:500;color:var(--muted);transition:color .2s,background .2s}
+.mobile-menu a:hover{color:var(--text);background:var(--border)}
+
+/* ─── HERO ─── */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(var(--nav-h) + 60px) 20px 80px;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(79,141,255,.15) 0%,transparent 70%);top:10%;left:50%;transform:translateX(-50%);pointer-events:none;animation:pulse-blob 6s ease-in-out infinite}
+@keyframes pulse-blob{0%,100%{transform:translateX(-50%) scale(1);opacity:.6}50%{transform:translateX(-50%) scale(1.3);opacity:1}}
+
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--border);border-radius:30px;padding:6px 14px;font-size:13px;color:var(--accent);font-weight:500;margin-bottom:24px;animation:fade-up .6s ease both}
+.badge-dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:blink 1.5s ease infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(36px,8vw,68px);font-weight:800;line-height:1.1;letter-spacing:-2px;max-width:780px;animation:fade-up .6s .1s ease both}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.hero p{font-size:clamp(16px,3vw,20px);color:var(--muted);max-width:520px;margin:20px auto 36px;animation:fade-up .6s .2s ease both}
+
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;animation:fade-up .6s .3s ease both}
+
+.stats-bar{display:flex;flex-wrap:wrap;gap:0;justify-content:center;margin-top:60px;background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;animation:fade-up .6s .4s ease both;max-width:600px;width:100%}
+.stat{flex:1;min-width:110px;padding:20px 12px;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-num{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.stat-label{font-size:12px;color:var(--muted);margin-top:2px}
+
+@keyframes fade-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* ─── BUTTONS ─── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:30px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s;border:none;text-decoration:none}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:linear-gradient(135deg,var(--accent),#3b7de8);color:#fff;box-shadow:0 4px 24px var(--glow)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px var(--glow)}
+.btn-outline{background:var(--card);color:var(--text);border:1px solid var(--border)}
+.btn-outline:hover{background:var(--bg3);transform:translateY(-2px)}
+.btn-green{background:#1a3a28;color:#25d366;border:1px solid rgba(37,211,102,.3)}
+.btn-green:hover{background:#1f4530;transform:translateY(-2px)}
+
+/* ─── SECTIONS ─── */
+section{padding:80px 20px;position:relative}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{display:inline-block;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(26px,5vw,40px);font-weight:800;letter-spacing:-1px;margin-bottom:16px}
+.section-sub{color:var(--muted);font-size:17px;max-width:500px;margin-bottom:48px}
+
+/* ─── SERVICES ─── */
+#services{background:var(--bg2)}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.service-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s,border-color .3s;cursor:default}
+.service-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--accent),var(--accent2));opacity:0;transition:opacity .3s;pointer-events:none}
+.service-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.3);border-color:var(--accent)}
+.service-card:hover::before{opacity:.05}
+.service-icon{font-size:32px;margin-bottom:16px;display:block}
+.service-card h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:8px}
+.service-card p{color:var(--muted);font-size:14px;margin-bottom:16px}
+.service-price{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-family:'Syne',sans-serif;font-size:20px;font-weight:700}
+.service-badge{position:absolute;top:16px;right:16px;background:rgba(52,210,111,.12);color:var(--green);border:1px solid rgba(52,210,111,.25);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:600}
+
+/* ─── PROCESS ─── */
+.process-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.step{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;text-align:center;transition:border-color .3s,transform .3s}
+.step:hover{border-color:var(--accent);transform:translateY(-4px)}
+.step-num{width:44px;height:44px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:#fff;margin:0 auto 16px}
+.step h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:8px}
+.step p{color:var(--muted);font-size:13px}
+
+/* ─── REVIEWS ─── */
+#reviews{background:var(--bg2)}
+
+/* Summary bar */
+.reviews-summary{display:flex;align-items:center;gap:32px;flex-wrap:wrap;margin-bottom:48px;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px 32px}
+.summary-score{text-align:center}
+.summary-big{font-family:'Syne',sans-serif;font-size:64px;font-weight:800;line-height:1;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.summary-stars{color:var(--yellow);font-size:20px;letter-spacing:3px;margin:6px 0}
+.summary-count{color:var(--muted);font-size:13px}
+.summary-bars{flex:1;min-width:200px}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.bar-label{font-size:12px;color:var(--muted);width:8px;text-align:right;flex-shrink:0}
+.bar-stars{color:var(--yellow);font-size:10px;flex-shrink:0}
+.bar-track{flex:1;height:6px;background:var(--bg3);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:4px;transition:width .8s ease}
+.bar-count{font-size:11px;color:var(--muted);width:20px;text-align:right;flex-shrink:0}
+
+/* Review cards grid */
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:40px}
+.review-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:transform .3s;animation:fade-up .4s ease both}
+.review-card:hover{transform:translateY(-4px)}
+.review-stars{color:var(--yellow);font-size:14px;margin-bottom:12px;letter-spacing:2px}
+.review-text{color:var(--muted);font-size:14px;margin-bottom:16px;font-style:italic;line-height:1.7}
+.review-author{display:flex;align-items:center;gap:10px}
+.review-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;font-family:'Syne',sans-serif;flex-shrink:0;color:#fff}
+.review-name{font-size:14px;font-weight:600}
+.review-date{font-size:12px;color:var(--muted)}
+
+/* Empty state */
+.reviews-empty{text-align:center;padding:48px 20px;color:var(--muted)}
+.reviews-empty p{font-size:16px;margin-top:8px}
+
+/* Reviews loading */
+.reviews-loading{text-align:center;padding:40px;color:var(--muted);font-size:14px}
+
+/* ─── LEAVE REVIEW FORM ─── */
+.leave-review{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px;max-width:600px;margin:0 auto}
+.leave-review h3{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:6px}
+.leave-review > p{color:var(--muted);font-size:14px;margin-bottom:28px}
+
+/* Star picker */
+.star-picker{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:4px;margin-bottom:20px}
+.star-picker input{display:none}
+.star-picker label{font-size:32px;color:var(--border);cursor:pointer;transition:color .15s,transform .15s;-webkit-text-fill-color:initial}
+.star-picker label:hover,
+.star-picker label:hover ~ label,
+.star-picker input:checked ~ label{color:var(--yellow)}
+.star-picker label:hover{transform:scale(1.15)}
+
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:12px;font-weight:600;letter-spacing:.5px;color:var(--muted);margin-bottom:6px}
+.form-group input,
+.form-group textarea{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;transition:border-color .25s,box-shadow .25s}
+.form-group input:focus,
+.form-group textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,141,255,.15)}
+.form-group input::placeholder,
+.form-group textarea::placeholder{color:var(--muted)}
+.form-group textarea{resize:vertical;min-height:90px}
+
+#reviewMsg{margin-top:12px;font-size:14px;padding:10px 14px;border-radius:10px;display:none}
+#reviewMsg.success{background:rgba(52,210,111,.1);color:var(--green);border:1px solid rgba(52,210,111,.25);display:block}
+#reviewMsg.error{background:rgba(255,69,85,.1);color:var(--red);border:1px solid rgba(255,69,85,.25);display:block}
+#reviewMsg.loading{background:var(--bg3);color:var(--muted);border:1px solid var(--border);display:block}
+
+/* ─── FAQ ─── */
+.faq-list{max-width:700px}
+.faq-item{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;transition:border-color .3s}
+.faq-item:hover{border-color:var(--accent)}
+.faq-question{padding:18px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:'Syne',sans-serif;font-size:16px;font-weight:600;background:var(--card);transition:background .2s;user-select:none}
+.faq-question:hover{background:var(--bg3)}
+.faq-arrow{font-size:18px;color:var(--accent);transition:transform .35s;flex-shrink:0;margin-left:12px}
+.faq-item.open .faq-arrow{transform:rotate(180deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1);background:var(--card)}
+.faq-answer-inner{padding:0 20px 18px;color:var(--muted);font-size:14px;line-height:1.7}
+.faq-item.open .faq-answer{max-height:300px}
+
+/* ─── CONTACT ─── */
+#contact{background:var(--bg2)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.contact-info h3{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;margin-bottom:16px}
+.contact-info p{color:var(--muted);font-size:15px;margin-bottom:28px;line-height:1.7}
+.contact-item{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;transition:border-color .3s,transform .3s}
+.contact-item:hover{border-color:var(--accent);transform:translateX(4px)}
+.contact-icon{width:38px;height:38px;background:linear-gradient(135deg,rgba(79,141,255,.2),rgba(0,212,255,.1));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.contact-item-label{font-size:12px;color:var(--muted)}
+.contact-item-val{font-size:14px;font-weight:600}
+
+.contact-form-wrap{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-group select{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;appearance:none;-webkit-appearance:none;transition:border-color .25s,box-shadow .25s}
+.form-group select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,141,255,.15)}
+#msg{margin-top:12px;font-size:14px;padding:10px 14px;border-radius:10px;display:none}
+#msg.success{background:rgba(52,210,111,.1);color:var(--green);border:1px solid rgba(52,210,111,.25);display:block}
+#msg.error{background:rgba(255,69,85,.1);color:var(--red);border:1px solid rgba(255,69,85,.25);display:block}
+#msg.loading{background:var(--bg3);color:var(--muted);border:1px solid var(--border);display:block}
+
+/* ─── FLOATS ─── */
+.float-wa{position:fixed;bottom:80px;right:20px;width:52px;height:52px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:900;transition:transform .3s,box-shadow .3s}
+.float-wa:hover{transform:scale(1.1);box-shadow:0 8px 28px rgba(37,211,102,.55)}
+
+.back-top{position:fixed;bottom:20px;right:20px;width:44px;height:44px;background:var(--card);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;z-index:900;transition:transform .3s,opacity .3s,box-shadow .3s;opacity:0;pointer-events:none;box-shadow:var(--shadow);color:var(--text)}
+.back-top.show{opacity:1;pointer-events:all}
+.back-top:hover{transform:translateY(-3px)}
+
+/* ─── FOOTER ─── */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 20px 24px}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px;margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid var(--border)}
+.footer-brand p{color:var(--muted);font-size:14px;margin-top:10px;max-width:280px}
+.footer-links h4{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.footer-links a{display:block;font-size:14px;color:var(--muted);margin-bottom:8px;transition:color .2s}
+.footer-links a:hover{color:var(--text)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:13px}
+.footer-badges{display:flex;gap:8px}
+.footer-badge{display:flex;align-items:center;gap:5px;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:4px 10px;font-size:12px}
+
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .contact-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .footer-top{flex-direction:column}
+  section{padding:60px 16px}
+  .reviews-summary{gap:20px;padding:20px}
+  .summary-big{font-size:48px}
+}
+@media(max-width:480px){
+  .hero-btns{flex-direction:column;align-items:stretch}
+  .hero-btns .btn{justify-content:center}
+  .stats-bar{flex-direction:column}
+  .stat{border-right:none;border-bottom:1px solid var(--border)}
+  .stat:last-child{border-bottom:none}
+}
 </style>
 </head>
-
 <body>
 
-<nav>
-<b>PhonePro</b>
-<div>
-<a href="#services">Services</a>
-<a href="#contact">Contact</a>
-</div>
-</nav>
-
-<section class="hero">
-<h1>Réparation smartphone rapide</h1>
-<p>Service express à Paris</p>
-
-<a href="#contact" class="btn">Prendre RDV</a>
-<a href="tel:+33123456789" class="btn">📞 Appeler</a>
-<a href="https://wa.me/33612345678" class="btn">💬 WhatsApp</a>
-</section>
-
-<section id="services">
-<h2>Nos services</h2>
-<div class="grid">
-<div class="card">📱 Écran cassé<br>À partir de 59€</div>
-<div class="card">🔋 Batterie<br>À partir de 39€</div>
-<div class="card">🛠 Diagnostic gratuit</div>
-<div class="card">💾 Récupération données</div>
-</div>
-</section>
-
-<section>
-<h2>Pourquoi nous ?</h2>
-<div class="grid">
-<div class="card">6000+ réparations</div>
-<div class="card">30 min</div>
-<div class="card">98% satisfaction</div>
-</div>
-</section>
-
-<section id="contact">
-<h2>Contact</h2>
-
-<form id="contactForm" action="https://formspree.io/f/xdayjawn" method="POST">
-
-<input type="text" name="name" placeholder="Votre nom" required>
-<input type="email" name="email" placeholder="Votre email" required>
-<input type="text" name="phone" placeholder="Téléphone">
-<input type="text" name="model" placeholder="Modèle (iPhone 14...)">
-<textarea name="message" placeholder="Décrivez votre problème..." required></textarea>
-
-<button type="submit">Envoyer</button>
-
-<p id="msg"></p>
-
-</form>
-
-</section>
-
-<section>
-<h2>Nous trouver</h2>
-<iframe 
-src="https://www.google.com/maps?q=12+rue+de+la+Paix+Paris&output=embed" 
-width="100%" height="300" style="border:0;border-radius:12px;">
-</iframe>
-</section>
-
-<footer>
-<p>© 2026 PhonePro</p>
-</footer>
-
+<!-- ══════════════════════════════════════════
+     ⚙️  CONFIGURATION FIREBASE — À REMPLIR
+     ══════════════════════════════════════════
+  1. Aller sur https://console.firebase.google.com
+  2. Créer un projet (gratuit)
+  3. Aller dans "Realtime Database" → Créer
+  4. Aller dans "Règles" et mettre :
+     { "rules": { ".read": true, ".write": true } }
+  5. Copier l'URL de votre base (ex: https://VOTRE-PROJET.firebaseio.com)
+  6. Remplacer la valeur ci-dessous
+═══════════════════════════════════════════════ -->
 <script>
-const form = document.getElementById("contactForm");
-const msg = document.getElementById("msg");
-
-form.addEventListener("submit", async (e)=>{
-e.preventDefault();
-
-msg.innerHTML="Envoi en cours...";
-
-const data = new FormData(form);
-
-try{
-const res = await fetch(form.action,{
-method:"POST",
-body:data,
-headers:{'Accept':'application/json'}
-});
-
-if(res.ok){
-msg.innerHTML="✅ Message envoyé ! On vous répond rapidement.";
-msg.className="success";
-form.reset();
-}else{
-msg.innerHTML="❌ Erreur, réessayez.";
-msg.className="error";
-}
-}catch{
-msg.innerHTML="⚠️ Problème réseau.";
-msg.className="error";
-}
-
-});
+  const FIREBASE_URL = "https://VOTRE-PROJET-firebase-rtdb.firebaseio.com";
+  // ↑ Remplacez cette URL par la vôtre (voir instructions au-dessus)
 </script>
 
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">📱</div>
+    PhonePro
+  </div>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#process">Comment ça marche</a>
+    <a href="#reviews">Avis</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn" aria-label="Thème">🌙</button>
+    <div class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMobile()">📱 Services</a>
+  <a href="#process" onclick="closeMobile()">⚙️ Comment ça marche</a>
+  <a href="#reviews" onclick="closeMobile()">⭐ Avis clients</a>
+  <a href="#faq" onclick="closeMobile()">❓ FAQ</a>
+  <a href="#contact" onclick="closeMobile()">✉️ Contact</a>
+</div>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-badge"><span class="badge-dot"></span>Disponible maintenant · Réponse rapide</div>
+  <h1>Votre smartphone<br>réparé en <em>30 minutes</em></h1>
+  <p>Experts iPhone & Samsung. Diagnostic 100% gratuit, pièces premium, garantie 3 mois.</p>
+  <div class="hero-btns">
+    <a href="#contact" class="btn btn-primary">📅 Prendre rendez-vous</a>
+    <a href="tel:+33123456789" class="btn btn-outline">📞 01 23 45 67 89</a>
+    <a href="https://wa.me/33612345678" class="btn btn-green">💬 WhatsApp</a>
+  </div>
+  <div class="stats-bar">
+    <div class="stat"><span class="stat-num">6 000+</span><div class="stat-label">Réparations</div></div>
+    <div class="stat"><span class="stat-num">30 min</span><div class="stat-label">En moyenne</div></div>
+    <div class="stat"><span class="stat-num">98%</span><div class="stat-label">Satisfaction</div></div>
+    <div class="stat"><span class="stat-num">3 mois</span><div class="stat-label">Garantie</div></div>
+  </div>
+</section>
+
+<!-- ─── SERVICES ─── -->
+<section id="services">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-label">Nos prestations</span>
+      <h2 class="section-title">Ce qu'on répare</h2>
+      <p class="section-sub">Pièces certifiées, techniciens expérimentés, résultat garanti 3 mois.</p>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <span class="service-badge">Le + demandé</span>
+        <span class="service-icon">📱</span>
+        <h3>Écran cassé</h3>
+        <p>Remplacement écran OLED/LCD toutes marques. Résultat comme neuf.</p>
+        <span class="service-price">Dès 59 €</span>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🔋</span>
+        <h3>Batterie</h3>
+        <p>Batterie qui ne tient plus ? On la change avec des cellules premium.</p>
+        <span class="service-price">Dès 39 €</span>
+      </div>
+      <div class="service-card">
+        <span class="service-badge">Gratuit</span>
+        <span class="service-icon">🔍</span>
+        <h3>Diagnostic</h3>
+        <p>On analyse votre appareil de fond en comble sans engagement.</p>
+        <span class="service-price">0 €</span>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">💾</span>
+        <h3>Récupération données</h3>
+        <p>Photos, contacts, messages — on récupère ce qui compte pour vous.</p>
+        <span class="service-price">Sur devis</span>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🎙️</span>
+        <h3>Micro / Haut-parleur</h3>
+        <p>Plus de son ? Micro muet ? On règle ça rapidement.</p>
+        <span class="service-price">Dès 49 €</span>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🌊</span>
+        <h3>Dégât des eaux</h3>
+        <p>Tombé dans l'eau ? Amenez-le vite, on peut souvent le sauver.</p>
+        <span class="service-price">Sur devis</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROCESS ─── -->
+<section id="process">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-label">Simple & rapide</span>
+      <h2 class="section-title">Comment ça marche</h2>
+      <p class="section-sub">De la prise en charge à la récupération, tout est fluide.</p>
+    </div>
+    <div class="process-steps reveal">
+      <div class="step"><div class="step-num">1</div><h3>Contactez-nous</h3><p>Par téléphone, WhatsApp ou formulaire. On répond rapidement.</p></div>
+      <div class="step"><div class="step-num">2</div><h3>Diagnostic gratuit</h3><p>On évalue la panne et vous donne un devis clair, sans surprise.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Réparation express</h3><p>Avec votre accord, on répare. La plupart des pannes : 30 minutes.</p></div>
+      <div class="step"><div class="step-num">4</div><h3>Garantie 3 mois</h3><p>Réparé, testé, garanti 3 mois pièces et main d'œuvre.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── REVIEWS ─── -->
+<section id="reviews">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-label">Avis clients</span>
+      <h2 class="section-title">Ce que disent nos clients</h2>
+      <p class="section-sub">Avis réels, laissés directement par nos clients.</p>
+    </div>
+
+    <!-- Summary bar -->
+    <div class="reviews-summary reveal" id="reviewsSummary" style="display:none">
+      <div class="summary-score">
+        <div class="summary-big" id="avgScore">—</div>
+        <div class="summary-stars" id="avgStars">☆☆☆☆☆</div>
+        <div class="summary-count" id="reviewCount">0 avis</div>
+      </div>
+      <div class="summary-bars" id="summaryBars"></div>
+    </div>
+
+    <!-- Reviews list -->
+    <div class="reviews-grid" id="reviewsGrid">
+      <div class="reviews-loading">⏳ Chargement des avis…</div>
+    </div>
+
+    <!-- Leave a review -->
+    <div class="reveal" style="margin-top:40px">
+      <div class="leave-review">
+        <h3>✍️ Laisser un avis</h3>
+        <p>Partagez votre expérience pour aider les prochains clients.</p>
+
+        <div class="form-group">
+          <label>Votre note</label>
+          <div class="star-picker" id="starPicker">
+            <input type="radio" name="stars" id="s5" value="5"><label for="s5" title="5 étoiles">★</label>
+            <input type="radio" name="stars" id="s4" value="4"><label for="s4" title="4 étoiles">★</label>
+            <input type="radio" name="stars" id="s3" value="3"><label for="s3" title="3 étoiles">★</label>
+            <input type="radio" name="stars" id="s2" value="2"><label for="s2" title="2 étoiles">★</label>
+            <input type="radio" name="stars" id="s1" value="1"><label for="s1" title="1 étoile">★</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="rName">Votre prénom</label>
+          <input type="text" id="rName" placeholder="Sophie M." maxlength="30">
+        </div>
+        <div class="form-group">
+          <label for="rText">Votre avis</label>
+          <textarea id="rText" placeholder="Décrivez votre expérience…" maxlength="400"></textarea>
+        </div>
+        <button class="btn btn-primary" id="reviewSubmitBtn" onclick="submitReview()" style="width:100%;justify-content:center">
+          Publier mon avis ⭐
+        </button>
+        <p id="reviewMsg"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section id="faq">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-label">Questions fréquentes</span>
+      <h2 class="section-title">FAQ</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-question">Faut-il prendre rendez-vous ? <span class="faq-arrow">▾</span></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Vous pouvez nous contacter directement par téléphone ou WhatsApp. Prendre contact à l'avance vous garantit un traitement prioritaire.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Est-ce que je perds mes données ? <span class="faq-arrow">▾</span></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Pour la grande majorité des réparations (écran, batterie, microphone…), vos données restent intactes. Dans les cas plus complexes, nous vous prévenons et conseillons une sauvegarde préalable.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Quelles marques réparez-vous ? <span class="faq-arrow">▾</span></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Nous réparons principalement les iPhone (toutes générations), Samsung Galaxy, Xiaomi, Huawei, et la plupart des smartphones Android du marché.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">La réparation est-elle garantie ? <span class="faq-arrow">▾</span></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Oui, toutes nos réparations sont garanties 3 mois pièces et main d'œuvre. Si un problème survient suite à notre intervention, nous le réparons gratuitement.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Comment vous contacter ? <span class="faq-arrow">▾</span></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Par téléphone au 01 23 45 67 89, via WhatsApp, ou par le formulaire de contact ci-dessous. Nous répondons généralement dans la journée.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Quels moyens de paiement acceptez-vous ? <span class="faq-arrow">▾</span></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Nous acceptons les espèces, les virements, et les paiements par carte ou sans contact (Apple Pay, Google Pay) selon les modalités convenues.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-label">Nous écrire</span>
+      <h2 class="section-title">Contactez-nous</h2>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="contact-info">
+        <h3>On est là pour vous</h3>
+        <p>Décrivez votre panne, on vous répond rapidement et on vous propose la meilleure solution.</p>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-item-label">Téléphone</div>
+            <div class="contact-item-val"><a href="tel:+33123456789" style="color:var(--text)">01 23 45 67 89</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">💬</div>
+          <div>
+            <div class="contact-item-label">WhatsApp</div>
+            <div class="contact-item-val"><a href="https://wa.me/33612345678" style="color:var(--text)">+33 6 12 34 56 78</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-item-label">Disponibilité</div>
+            <div class="contact-item-val">Lun–Sam · 9h00–19h00</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✅</div>
+          <div>
+            <div class="contact-item-label">Garantie</div>
+            <div class="contact-item-val">3 mois pièces & main d'œuvre</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <form id="contactForm" action="https://formspree.io/f/xdayjawn" method="POST">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Votre nom</label>
+              <input type="text" id="name" name="name" placeholder="Jean Dupont" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Votre email</label>
+              <input type="email" id="email" name="email" placeholder="jean@email.com" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Téléphone</label>
+              <input type="tel" id="phone" name="phone" placeholder="06 12 34 56 78">
+            </div>
+            <div class="form-group">
+              <label for="model">Modèle</label>
+              <input type="text" id="model" name="model" placeholder="iPhone 14, Galaxy S23…">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="panne">Type de panne</label>
+            <select id="panne" name="panne">
+              <option value="">Sélectionner…</option>
+              <option>Écran cassé / fissuré</option>
+              <option>Batterie défaillante</option>
+              <option>Dégât des eaux</option>
+              <option>Récupération de données</option>
+              <option>Micro / Haut-parleur</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Décrivez votre problème</label>
+            <textarea id="message" name="message" placeholder="Décrivez votre panne…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center" id="submitBtn">
+            Envoyer le message ✉️
+          </button>
+          <p id="msg"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:10px"><div class="nav-logo-icon">📱</div> PhonePro</div>
+        <p>Réparation express de smartphones. Qualité garantie 3 mois, prix transparents.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Services</h4>
+        <a href="#services">Écran cassé</a>
+        <a href="#services">Batterie</a>
+        <a href="#services">Récupération données</a>
+        <a href="#services">Dégât des eaux</a>
+      </div>
+      <div class="footer-links">
+        <h4>Infos</h4>
+        <a href="#process">Comment ça marche</a>
+        <a href="#reviews">Avis clients</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-links">
+        <h4>Contact</h4>
+        <a href="tel:+33123456789">📞 01 23 45 67 89</a>
+        <a href="https://wa.me/33612345678">💬 WhatsApp</a>
+        <a href="#contact">✉️ Formulaire</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 PhonePro · Tous droits réservés</span>
+      <div class="footer-badges">
+        <div class="footer-badge">✅ Garantie 3 mois</div>
+        <div class="footer-badge">🔒 Données protégées</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/33612345678" class="float-wa" aria-label="WhatsApp">💬</a>
+<button class="back-top" id="backTop" aria-label="Retour en haut">↑</button>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<script>
+/* ── THEME ── */
+const html = document.documentElement;
+const themeBtn = document.getElementById('themeBtn');
+const saved = localStorage.getItem('theme') || 'dark';
+html.dataset.theme = saved;
+themeBtn.textContent = saved === 'dark' ? '🌙' : '☀️';
+themeBtn.addEventListener('click', () => {
+  const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+  html.dataset.theme = next;
+  themeBtn.textContent = next === 'dark' ? '🌙' : '☀️';
+  localStorage.setItem('theme', next);
+});
+
+/* ── HAMBURGER ── */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+function closeMobile() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+}
+
+/* ── BACK TO TOP ── */
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => backTop.classList.toggle('show', window.scrollY > 400));
+backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+/* ── FAQ ── */
+document.querySelectorAll('.faq-question').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+/* ── SCROLL REVEAL ── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+
+/* ── CONTACT FORM ── */
+const form = document.getElementById('contactForm');
+const msg = document.getElementById('msg');
+const submitBtn = document.getElementById('submitBtn');
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Envoi…';
+  msg.className = 'loading'; msg.textContent = '⏳ Envoi en cours…';
+  try {
+    const res = await fetch(form.action, { method:'POST', body: new FormData(form), headers:{'Accept':'application/json'} });
+    if (res.ok) {
+      msg.className = 'success'; msg.textContent = '✅ Message envoyé ! On vous répond rapidement.';
+      form.reset();
+    } else throw new Error();
+  } catch {
+    msg.className = 'error'; msg.textContent = '❌ Erreur. Appelez-nous directement.';
+  } finally {
+    submitBtn.disabled = false; submitBtn.textContent = 'Envoyer le message ✉️';
+  }
+});
+
+/* ════════════════════════════════════════════
+   ⭐  SYSTÈME D'AVIS — FIREBASE
+   ════════════════════════════════════════════ */
+
+const COLORS = [
+  'linear-gradient(135deg,#4f8dff,#00d4ff)',
+  'linear-gradient(135deg,#ff6b6b,#feca57)',
+  'linear-gradient(135deg,#48dbfb,#1dd1a1)',
+  'linear-gradient(135deg,#a29bfe,#fd79a8)',
+  'linear-gradient(135deg,#fdcb6e,#e17055)',
+  'linear-gradient(135deg,#6c5ce7,#00cec9)',
+];
+
+function starsHtml(n) {
+  return '★'.repeat(n) + '☆'.repeat(5 - n);
+}
+
+function timeAgo(ts) {
+  const diff = Date.now() - ts;
+  const d = Math.floor(diff / 86400000);
+  if (d === 0) return "Aujourd'hui";
+  if (d === 1) return "Hier";
+  if (d < 7) return `Il y a ${d} jours`;
+  if (d < 30) return `Il y a ${Math.floor(d/7)} semaine${Math.floor(d/7)>1?'s':''}`;
+  if (d < 365) return `Il y a ${Math.floor(d/30)} mois`;
+  return `Il y a ${Math.floor(d/365)} an${Math.floor(d/365)>1?'s':''}`;
+}
+
+function renderReviews(reviewsObj) {
+  const grid = document.getElementById('reviewsGrid');
+  const summaryEl = document.getElementById('reviewsSummary');
+
+  if (!reviewsObj || Object.keys(reviewsObj).length === 0) {
+    grid.innerHTML = `<div class="reviews-empty" style="grid-column:1/-1">
+      <div style="font-size:48px">💬</div>
+      <p>Aucun avis pour l'instant.<br>Soyez le premier à partager votre expérience !</p>
+    </div>`;
+    summaryEl.style.display = 'none';
+    return;
+  }
+
+  const list = Object.values(reviewsObj).sort((a,b) => b.date - a.date);
+
+  // Summary
+  const counts = [0,0,0,0,0];
+  list.forEach(r => counts[r.stars - 1]++);
+  const total = list.length;
+  const avg = list.reduce((s,r) => s+r.stars, 0) / total;
+
+  document.getElementById('avgScore').textContent = avg.toFixed(1);
+  document.getElementById('avgStars').textContent = starsHtml(Math.round(avg));
+  document.getElementById('reviewCount').textContent = `${total} avis`;
+
+  let barsHtml = '';
+  for (let i = 5; i >= 1; i--) {
+    const pct = total ? Math.round((counts[i-1]/total)*100) : 0;
+    barsHtml += `<div class="bar-row">
+      <span class="bar-label">${i}</span>
+      <span class="bar-stars">${'★'.repeat(i)}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+      <span class="bar-count">${counts[i-1]}</span>
+    </div>`;
+  }
+  document.getElementById('summaryBars').innerHTML = barsHtml;
+  summaryEl.style.display = 'flex';
+
+  // Cards
+  grid.innerHTML = list.map((r, i) => {
+    const letter = (r.name || '?')[0].toUpperCase();
+    const color = COLORS[i % COLORS.length];
+    return `<div class="review-card" style="animation-delay:${i*0.05}s">
+      <div class="review-stars">${starsHtml(r.stars)}</div>
+      <p class="review-text">« ${r.text.replace(/</g,'&lt;')} »</p>
+      <div class="review-author">
+        <div class="review-avatar" style="background:${color}">${letter}</div>
+        <div>
+          <div class="review-name">${r.name.replace(/</g,'&lt;')}</div>
+          <div class="review-date">${timeAgo(r.date)}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function loadReviews() {
+  // Firebase not configured yet — show demo message
+  if (FIREBASE_URL.includes('VOTRE-PROJET')) {
+    document.getElementById('reviewsGrid').innerHTML = `
+      <div class="reviews-empty" style="grid-column:1/-1">
+        <div style="font-size:40px">⚙️</div>
+        <p style="color:var(--accent);font-weight:600">Configuration Firebase requise</p>
+        <p style="font-size:13px;margin-top:8px">Suivez les instructions dans le code pour activer les avis.</p>
+      </div>`;
+    return;
+  }
+  try {
+    const res = await fetch(`${FIREBASE_URL}/reviews.json`);
+    const data = await res.json();
+    renderReviews(data);
+  } catch {
+    document.getElementById('reviewsGrid').innerHTML = `<div class="reviews-loading">⚠️ Impossible de charger les avis.</div>`;
+  }
+}
+
+async function submitReview() {
+  const stars = document.querySelector('input[name="stars"]:checked');
+  const name = document.getElementById('rName').value.trim();
+  const text = document.getElementById('rText').value.trim();
+  const reviewMsg = document.getElementById('reviewMsg');
+  const btn = document.getElementById('reviewSubmitBtn');
+
+  // Validation
+  if (!stars) { reviewMsg.className='error'; reviewMsg.textContent='⭐ Veuillez choisir une note.'; return; }
+  if (!name) { reviewMsg.className='error'; reviewMsg.textContent='✏️ Veuillez entrer votre prénom.'; return; }
+  if (text.length < 10) { reviewMsg.className='error'; reviewMsg.textContent='📝 Votre avis doit faire au moins 10 caractères.'; return; }
+
+  if (FIREBASE_URL.includes('VOTRE-PROJET')) {
+    reviewMsg.className='error';
+    reviewMsg.textContent='⚙️ Firebase non configuré. Suivez les instructions dans le code.';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Publication…';
+  reviewMsg.className = 'loading'; reviewMsg.textContent = '⏳ Publication en cours…';
+
+  const review = { name, text, stars: parseInt(stars.value), date: Date.now() };
+
+  try {
+    const res = await fetch(`${FIREBASE_URL}/reviews.json`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(review)
+    });
+    if (!res.ok) throw new Error();
+    reviewMsg.className = 'success';
+    reviewMsg.textContent = '✅ Merci pour votre avis ! Il est maintenant en ligne.';
+    document.getElementById('rName').value = '';
+    document.getElementById('rText').value = '';
+    document.querySelector('input[name="stars"]:checked').checked = false;
+    await loadReviews();
+    document.getElementById('reviews').scrollIntoView({ behavior:'smooth', block:'start' });
+  } catch {
+    reviewMsg.className = 'error';
+    reviewMsg.textContent = '❌ Erreur lors de la publication. Réessayez.';
+  } finally {
+    btn.disabled = false; btn.textContent = 'Publier mon avis ⭐';
+  }
+}
+
+// Init
+loadReviews();
+</script>
 </body>
 </html>
